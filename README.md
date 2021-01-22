@@ -2,6 +2,10 @@
 
 simple oss server
 
+一个自建OSS的小项目，项目中越来越喜欢使用阿里OSS的签名前端上传了，可当项目私有化部署而不使用OSS时，又不想改动代码，于是有了这个兼容OSS签名上传的服务端项目。同时在开启匿名上传后也可以做为普通的上传服务器使用。
+
+项目使用eggjs构建,OSS上传测试使用[cool-admin-pro](https://cool-admin.com/) 
+
 镜像拉取
 ```
 docker pull gcslaoli/eggoss
