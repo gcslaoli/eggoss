@@ -7,13 +7,13 @@ simple oss server
 项目使用eggjs构建,OSS上传测试使用[cool-admin-pro](https://cool-admin.com/) 
 
 镜像拉取
-```
+```shell
 docker pull gcslaoli/eggoss
 或
 docker pull registry.cn-beijing.aliyuncs.com/gcslaoli/eggoss
 ```
 ## 示例`docker-compose.yml`
-```
+```yml
 version: '3'
 services:
   eggoss:
