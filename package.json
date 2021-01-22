@@ -9,6 +9,7 @@
   "dependencies": {
     "egg": "^2.29.1",
     "egg-cors": "^2.2.3",
+    "egg-etag": "^1.1.0",
     "egg-scripts": "^2.13.0"
   },
   "devDependencies": {
@@ -25,6 +26,7 @@
   },
   "scripts": {
     "start": "egg-scripts start --daemon --title=egg-server-eggoss",
+    "docker-start": "egg-scripts start --title=egg-server-eggoss",
     "stop": "egg-scripts stop --title=egg-server-eggoss",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",

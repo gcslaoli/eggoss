@@ -1,6 +1,7 @@
 /* eslint valid-jsdoc: "off" */
 
 'use strict';
+const path = require('path');
 
 /**
  * @param {Egg.EggAppInfo} appInfo app info
@@ -50,11 +51,23 @@ module.exports = appInfo => {
     '.xlsx',
     '.xls',
   ];
-
+    // 靜態目錄及緩存設置
+  config.static = {
+    prefix: '/',
+    dir: path.join(appInfo.baseDir, 'app/public'),
+    dynamic: true,
+    preload: false,
+    // maxAge: 31536000,
+    maxAge: 0,
+    buffer: false,
+  };
   config.multipart = {
-    fileSize: '100mb',
+    fileSize: process.env.fileSize || '100mb',
     mode: 'file',
     whitelist,
+  };
+  config.etag = {
+    weak: false,
   };
   config.cors = {
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
@@ -64,15 +77,17 @@ module.exports = appInfo => {
   config.oss = {
     client: {
       accessKeyId: 'LTAI4G7PMtfUqdgCNMRB66Xa',
-      accessKeySecret: 'M5HmmPrYfgA1CES39M5DAuir8y3sEc',
+      accessKeySecret: process.env.accessKeySecret || 'www.lidong.xin',
       bucket: 'oss',
       endpoint: 'dev.lidong.xin',
       timeout: '3600s',
+      allowAnonymous: process.env.allowAnonymous || false,
+      protocal: process.env.protocal || 'https',
     },
   };
   // add your user config here
   const userConfig = {
-    // myAppName: 'egg',
+    myAppName: 'egg',
   };
 
   return {

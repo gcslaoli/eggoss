@@ -9,10 +9,11 @@ const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
   async index() {
-    const { ctx } = this;
+    const { ctx, config } = this;
     const body = {
       host: ctx.request.host,
-      request: ctx.request,
+      allowAnonymous: config.oss.client.allowAnonymous,
+      protocal: config.oss.client.protocal,
     };
     ctx.body = body;
   }
@@ -25,14 +26,16 @@ class HomeController extends Controller {
     let filename = '未指定.txt';
     if (!file) return ctx.throw(400, '未上传文件!');
     if (!key) {
+      if (!config.oss.client.allowAnonymous) return ctx.throw(403, '禁止匿名上传！');
       filename = moment().format('YYYYMMDD') + '/' + uuid.v1() + path.extname(file.filename).toLowerCase();
     } else {
+      const signatureV = crypto.createHmac('sha1', config.oss.client.accessKeySecret).update(policy).digest('base64');
+      if (signature !== signatureV) {
+        return ctx.throw(403, '签名验证失败！');
+      }
       filename = key;
     }
-    const signatureV = crypto.createHmac('sha1', config.oss.client.accessKeySecret).update(policy).digest('base64');
-    if (signature !== signatureV) {
-      return ctx.throw(403, '签名验证失败！');
-    }
+
     const targetPath = path.join(this.config.baseDir, 'app/public', filename);
     const dirname = path.dirname(targetPath);
     this.logger.info({ dirname });
@@ -47,7 +50,7 @@ class HomeController extends Controller {
       // delete those request tmp files
       await ctx.cleanupRequestFiles();
     }
-    ctx.body = { code: 1000, url: 'https://' + ctx.request.host + '/' + filename };
+    ctx.body = { code: 1000, url: config.oss.client.protocal + '://' + ctx.request.host + '/' + filename };
   }
   async mkdirsSync(dirname) {
     if (fs.existsSync(dirname)) {

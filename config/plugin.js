@@ -10,5 +10,7 @@ module.exports = {
     enable: true,
     package: 'egg-cors',
   },
-
+  etag: {
+    package: 'egg-etag',
+  },
 };

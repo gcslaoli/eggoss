@@ -13,4 +13,5 @@ run/
 typings/
 .nyc_output/
 app/public/
+.git/
 data/
