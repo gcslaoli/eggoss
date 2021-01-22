@@ -17,7 +17,6 @@ docker pull registry.cn-beijing.aliyuncs.com/gcslaoli/eggoss
 version: '3'
 services:
   eggoss:
-    build: .
     image: gcslaoli/eggoss
     # restart: always
     volumes:
