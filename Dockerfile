@@ -18,7 +18,7 @@ WORKDIR /app
 # 持久化日志目录
 VOLUME [ "/app/app/public" ]
 COPY package.json /app/package.json
-RUN yarn --registry=https://npm.sltapp.cn
+RUN yarn --registry=https://repo.huaweicloud.com/repository/npm/
 # RUN yarn
 COPY ./ /app
 CMD yarn docker-start

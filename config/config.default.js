@@ -22,6 +22,7 @@ module.exports = appInfo => {
     csrf: {
       enable: false,
     },
+    domainWhiteList: ['*'],
   };
 
   const whitelist = [

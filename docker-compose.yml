@@ -11,7 +11,7 @@ services:
       accessKeySecret: "12345678" # 配置accessKeySecret 默认值'www.lidong.xin'
       fileSize: "100mb" # 最大上传文件大小，默认值 100mb
       allowAnonymous: "true" # 是否允许匿名上传 默认值 false
-      protocal: "http" # 返回值中 url协议头 可选 'http' 或 'https' 默认值 'https'
+      protocal: "https" # 返回值中 url协议头 可选 'http' 或 'https' 默认值 'https'
     ports:
       - 7001:7001
   eggoss-aliyun:
